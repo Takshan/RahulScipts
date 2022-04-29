@@ -1,9 +1,0 @@
-setup.py
-RahulScripts.egg-info/PKG-INFO
-RahulScripts.egg-info/SOURCES.txt
-RahulScripts.egg-info/dependency_links.txt
-RahulScripts.egg-info/entry_points.txt
-RahulScripts.egg-info/top_level.txt
-rahulscripts/__init__.py
-rahulscripts/__version__.py
-rahulscripts/rahulscripts.py
