@@ -2,6 +2,13 @@ from setuptools import setup
 
 from rahulscripts.__version__ import __version__
 
+install_requires = [
+    'pip',
+    'setuptools',
+    'rich'
+]
+
+
 setup(
     name="RahulScripts",
     version=__version__,
@@ -10,7 +17,7 @@ setup(
     author_email="rahul@drugonix.com",
     url="https://www.drugonix.com",
     packages=["rahulscripts"],
-    install_requires =["rich"],
+    install_requires =install_requires,
     entry_points={
         "console_scripts": [
             "rahulscripts.cli = rahulscripts.cli:main",
