@@ -15,6 +15,7 @@ setup(
     description="Some daily used scripts",
     author="Rahul Brahma",
     author_email="rahul@drugonix.com",
+    download_url=f'https://github.com/Takshan/RahulScripts/{rahulscripts.__version__}.tar.gz',
     url="https://www.drugonix.com",
     packages=["rahulscripts"],
     install_requires =install_requires,
