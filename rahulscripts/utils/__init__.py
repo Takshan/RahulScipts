@@ -1,2 +1,2 @@
-from .text_highlight import *
+from .text_highlight import SequenceHighlighter
 from .utilities import *
