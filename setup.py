@@ -10,7 +10,7 @@ setup(
     author_email="rahul@drugonix.com",
     url="https://www.drugonix.com",
     packages=["rahulscripts"],
-    # install_requires =["fpocket-python"],
+    install_requires =["rich"],
     entry_points={
         "console_scripts": [
             "rahulscripts.cli = rahulscripts.cli:main",
