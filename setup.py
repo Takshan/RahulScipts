@@ -3,9 +3,10 @@ from setuptools import setup
 from rahulscripts.__version__ import __version__
 
 install_requires = [
+    'rich',
     'pip',
     'setuptools',
-    'rich'
+    
 ]
 
 
