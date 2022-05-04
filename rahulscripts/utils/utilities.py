@@ -5,7 +5,6 @@ from typing import List
 
 import ipywidgets
 import numpy as np
-import rdkit
 import tqdm
 from IPython.core.display import HTML
 from IPython.display import IFrame, clear_output, display
@@ -13,6 +12,7 @@ from openbabel import pybel
 from rich import print
 from rich.console import Console
 from rich.style import Style
+
 console = Console()
 base_style = Style.parse("italic magenta bold")
 
@@ -27,10 +27,10 @@ def tarfiles(files, directory=".", verbose=False):
     :return: _description_
     :rtype: _type_
     """
-    #import shutil
+    # import shutil
     import tarfile
 
-    #import tempfile
+    # import tempfile
 
     base_dir = os.path.dirname(files)
     file_name, file_type = files.rsplit("_", 1)
@@ -47,10 +47,10 @@ def tarfiles(files, directory=".", verbose=False):
         suffix = "fastq.gz"
     target = f"{complete_path_filename}.{suffix}"
     # good to use temp ut not using for now to save time
-    #with tempfile.TemporaryDirectory() as tmpdir:
+    # with tempfile.TemporaryDirectory() as tmpdir:
     with tarfile.open(target, "w:gz") as tar:
-        #for file in files:
-        #shutil.copy(files, tmpdir)
+        # for file in files:
+        # shutil.copy(files, tmpdir)
         tar.add(files)
 
     if verbose:
@@ -59,17 +59,19 @@ def tarfiles(files, directory=".", verbose=False):
 
 
 def tar_for_umi(files: list) -> list:
-    """tar_for_umi _summary_
-    """
-    #print(f'starting tar balling on {cpu_count()-1} cores')
+    """tar_for_umi _summary_"""
+    # print(f'starting tar balling on {cpu_count()-1} cores')
     pool = Pool(processes=(int(cpu_count()) - 1))
     return list(
-        tqdm.tqdm(pool.imap_unordered(tarfiles, files), total=len(files)))
+        tqdm.tqdm(pool.imap_unordered(tarfiles, files), total=len(files))
+    )
 
 
-def view_report( size: tuple = (800, 600),
-                file_type: str ="html",
-                directory: str = "current") -> display:
+def view_report(
+    size: tuple = (800, 1200),
+    file_type: str = "html",
+    directory: str = "current",
+) -> display:
     """view_report _summary_
 
     :param size: _description_, defaults to (800, 600)
@@ -86,34 +88,38 @@ def view_report( size: tuple = (800, 600),
     all_files: List = []
     for f in os.listdir(directory):
         if f.endswith(file_type):
-            _file = os.path.relpath(os.path.join(os.path.join(os.getcwd(), directory), f), os.getcwd())
+            _file = os.path.relpath(
+                os.path.join(os.path.join(os.getcwd(), directory), f),
+                os.getcwd(),
+            )
             all_files.append(_file)
 
     def on_change(change):
         if change["name"] == "value" and (change["new"] != change["old"]):
             clear_output()
             display(selection)
-            console.print(f"👉 Showing Report for :{selection.value}",style = base_style + Style(underline=True))
-            display(IFrame(change['new'], width=size[0], height=size[1]))
+            console.print(
+                f"👉 Showing Report for :{selection.value}",
+                style=base_style + Style(underline=True),
+            )
+            display(IFrame(change["new"], width=size[0], height=size[1]))
 
     selection = ipywidgets.Dropdown(
-    options=all_files,
-    description='Select File:',
-    disabled=False,
-    value = all_files[0],
+        options=all_files,
+        description="Select File:",
+        disabled=False,
+        value=all_files[0],
     )
     display(selection)
-    console.print(f"👉 Showing Report for :{selection.value}",style = base_style + Style(underline=True))
-    selection.observe(on_change, names='value')
+    console.print(
+        f"👉 Showing Report for :{selection.value}",
+        style=base_style + Style(underline=True),
+    )
+    selection.observe(on_change, names="value")
     display(IFrame(selection.value, width=size[0], height=size[1]))
 
 
-
-
-
-
-
-def centre_of_mass(mol: rdkit.Chem.Mol) -> np.ndarray:
+def centre_of_mass(mol) -> np.ndarray:
     """
     Calculate the centre of mass of a molecule.
 
@@ -131,7 +137,7 @@ def centre_of_mass(mol: rdkit.Chem.Mol) -> np.ndarray:
     return np.array([x / mass, y / mass, z / mass])
 
 
-def centroid_of_molecule(mol: rdkit.Chem.Mol) -> np.ndarray:
+def centroid_of_molecule(mol) -> np.ndarray:
     """
     Calculate the centroid of a molecule.
     """
@@ -144,7 +150,8 @@ def centroid_of_molecule(mol: rdkit.Chem.Mol) -> np.ndarray:
             y += atom.coords[1]
             z += atom.coords[2]
     return np.array(
-        [x / len(mol.atoms), y / len(mol.atoms), z / len(mol.atoms)])
+        [x / len(mol.atoms), y / len(mol.atoms), z / len(mol.atoms)]
+    )
 
 
 def file_to_mol(filename, formats=None):
@@ -178,11 +185,14 @@ def file_search(types=None, target="*", specific=None, BASE_DIR=None):
     try:
         if specific is None:
             return sorted(
-                glob(f"{BASE_DIR}/**/{target}.{types}", recursive=True))
+                glob(f"{BASE_DIR}/**/{target}.{types}", recursive=True)
+            )
         else:
             return sorted(
-                glob(f"{BASE_DIR}/**/{specific}/{target}.{types}",
-                     recursive=True))
+                glob(
+                    f"{BASE_DIR}/**/{specific}/{target}.{types}", recursive=True
+                )
+            )
     except Exception as error:
         print(f"{error} \n File not found anywhere.")
 
@@ -193,11 +203,11 @@ def HideShow_code():
     :return: _description_
     :rtype: _type_
     """
-    toggle_code_str = '''
+    toggle_code_str = """
     <form action="javascript:code_toggle()"><input type="submit" id="toggleButton" value="Show|Hide Code"></form>
-    '''
+    """
 
-    toggle_code_prepare_str = '''
+    toggle_code_prepare_str = """
         <script>
         function code_toggle() {
             if ($('div.cell.code_cell.rendered.selected div.input').css('display')!='none'){
@@ -208,5 +218,5 @@ def HideShow_code():
         }
         </script>
 
-    '''
+    """
     return display(HTML(toggle_code_prepare_str + toggle_code_str))

@@ -197,5 +197,3 @@ sub rc{
     $string =~ tr/GATC/CTAG/;
     return $string;
 }
-
-

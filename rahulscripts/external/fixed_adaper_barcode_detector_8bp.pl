@@ -19,52 +19,52 @@ while (@in1){
     die "Failed to rename $out1\n" unless ($out1 =~ s/fastq\.gz$/barcode_removed.fastq.gz/);
     my $out2 = $in2;
     die "Failed to rename $out2\n" unless ($out2 =~ s/fastq\.gz$/barcode_removed.fastq.gz/);
-    
+
     open (OUT1,"| gzip -c - > $out1") or die $!;
     open (OUT2,"| gzip -c - > $out2") or die $!;
-    
+
     print "Processing files $in1 and $in2\n";
     my %r1; # storing the barcodes for R1
     my %r2; # storing the barcodes for R2
-    
+
     my %fix1; # storing the fixed sequence (CAGT + A from A-tailing) of R1
     my %fix2; # storing the fixed sequence (CAGT + A from A-tailing) of R2
-    
+
     my $count = 0;
     my $filtered_count = 0;
     my $r1_contains_rc = 0;
-    
-    
+
+
     while (1){
-	
+
 	my $one1 = <IN1>;
 	my $one2 = <IN1>;
 	my $one3 = <IN1>;
 	my $one4 = <IN1>;
-	
+
 	my $two1 = <IN2>;
 	my $two2 = <IN2>;
 	my $two3 = <IN2>;
 	my $two4 = <IN2>;
-	
+
 	last unless  ($one4 and $two4);
 	chomp $one2;
 	chomp $two2;
-	
+
 	chomp $one1; # need to append barcode to the read ID
 	chomp $two1;
-	
+
 	chomp $one4; # need to be shortened too
-	chomp $two4; 
-	
+	chomp $two4;
+
 	++$count; # line count
-	
+
 	my $r1_barcode;
 	my $r2_barcode;
 	my $r1_fix;
 	my $r2_fix;
-	
-	
+
+
 	$r1_barcode = substr($one2,0,8);
 	$r2_barcode = substr($two2,0,8);
 	$r1_fix = substr($one2,8,4);
@@ -96,12 +96,12 @@ while (@in1){
 	print OUT1 "$one1\n";
 	print OUT1 "$seq1\n";
 	print OUT1 "$one3";
-	print OUT1 "$qual1\n"; 
+	print OUT1 "$qual1\n";
 
 	print OUT2 "$two1\n";
 	print OUT2 "$seq2\n";
 	print OUT2 "$two3";
-	print OUT2 "$qual2\n"; 
+	print OUT2 "$qual2\n";
 
        # sleep(1);
 
@@ -125,7 +125,7 @@ while (@in1){
     my $perc;
     my $perc_contains_r2;
 
-    if ($count){   
+    if ($count){
 	$perc = sprintf("%.2f",$filtered_count/$count * 100);
 	$perc_contains_r2 = sprintf("%.2f",$r1_contains_rc/$count * 100);
     }
@@ -133,8 +133,8 @@ while (@in1){
 	$perc = 'N/A';
 	$perc_contains_r2 = 'N/A';
     }
-    
-    warn "Sequences processed in total: $count\nthereof had fixed sequence CAGT in both R1 and R2:\t $filtered_count ($perc%)\n"; 
+
+    warn "Sequences processed in total: $count\nthereof had fixed sequence CAGT in both R1 and R2:\t $filtered_count ($perc%)\n";
     warn "R1 contained barcode and fixed sequence of R2 (as reverse complement):\t$r1_contains_rc ($perc_contains_r2%)\n\n";
 
 
@@ -194,6 +194,3 @@ sub rc{
     $string =~ tr/GATC/CTAG/;
     return $string;
 }
-
-
-

@@ -1,4 +1,3 @@
-import sys
 import rahulscripts
 from rahulscripts import run_command
 
@@ -26,8 +25,9 @@ def umi_run(
     try:
         command = f"perl {rahulscripts.__path__[0]}/external/fixed_adaper_barcode_detector_8bp.pl {sra_file} {output_dir}"  # {threads} {umi_length}"
         run_command(command)
-        #print(command)
+        # print(command)
     except Exception as error:
         print(
             "Perl is not installed.\nVisit https://www.perl.org/get.html to download Perl."
-            f"\n {error}")
+            f"\n {error}"
+        )
