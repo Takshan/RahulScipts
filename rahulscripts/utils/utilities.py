@@ -54,7 +54,7 @@ def tarfiles(files, directory=".", verbose=False):
         tar.add(files)
 
     if verbose:
-        f"Save as {target}"
+        print(f"Save as {target}")
     return target
 
 

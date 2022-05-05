@@ -10,6 +10,7 @@ def run_command(command, split=True):
     :type command: _type_
     :param split: _description_, defaults to True
     :type split: bool, optional
+    :param command: _description_
     """
     if split:
         command = list(command.split())

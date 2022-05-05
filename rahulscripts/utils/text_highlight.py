@@ -1,5 +1,5 @@
 from typing import Union
-import rich
+
 from rich.highlighter import Highlighter
 from rich.text import Text
 

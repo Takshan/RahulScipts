@@ -1,5 +1,6 @@
 {
 	"files.autoSave": "onFocusChange",
 	"workbench.colorTheme": "Valorant Theme",
-	"python.formatting.provider": "yapf"
+	"python.formatting.provider": "yapf",
+	"jupyter.jupyterServerType": "local"
 }
