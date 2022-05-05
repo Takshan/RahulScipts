@@ -1,1 +1,1 @@
-from .downloader import *
+from .downloader import run_command
