@@ -8,7 +8,7 @@ import numpy as np
 import tqdm
 from IPython.core.display import HTML
 from IPython.display import IFrame, clear_output, display
-from openbabel import pybel
+#from openbabel import pybel
 from rich import print
 from rich.console import Console
 from rich.style import Style

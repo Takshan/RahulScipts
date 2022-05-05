@@ -5,10 +5,13 @@ from setuptools import setup
 from rahulscripts.__version__ import __version__
 
 install_requires = [
-    'rich',
-    'pip',
+    'pip3',
     'setuptools',
-    
+    "rich",
+    "ipywidgets",
+    "numpy",
+    "tqdm",
+   
 ]
 
 
@@ -18,7 +21,7 @@ setup(
     description="Some daily used scripts",
     author="Rahul Brahma",
     author_email="rahul@drugonix.com",
-    download_url=f'https://github.com/Takshan/RahulScripts/{__version__}.tar.gz',
+    #download_url=f'https://github.com/Takshan/RahulScripts/{__version__}.tar.gz',
     url="https://www.drugonix.com",
     packages=["rahulscripts"],
     install_requires =install_requires,
