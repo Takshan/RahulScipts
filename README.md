@@ -2,13 +2,21 @@
 
 ### Daily usage scripts. Specially used in Genomics.
 
-1. As a function:
+1. ### Instalation:
+
+### Through pip:
 
 ```bash
 pip install rahulscipts
 ```
 
-2. To use:
+### from github:
+
+```bash
+pip install git+https://github.com/Takshan/RahulScipts.git
+```
+
+2. Usage:
 
 ```python
 import rahulscripts as rs
