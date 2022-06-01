@@ -1,3 +1,8 @@
+!\[version\](https://badgen.net/pypi/v/pip/RahulScripts)
+!\[licence\](https://badgen.net/pypi/license/RahulScipts)
+!\[latest release\](https://badgen.net/github/release/RahulScipts/RahulScipts)
+
+
 # RahulScipts
 
 ### Daily usage scripts. Specially used in Genomics.
