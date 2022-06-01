@@ -1,4 +1,4 @@
 # RahulScipts
 
-Daily usage scripts...
-Specially used in Genomics/.//
+Daily usage scripts.
+Specially used in Genomics.
