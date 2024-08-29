@@ -8,7 +8,18 @@ import numpy as np
 import tqdm
 from IPython.core.display import HTML
 from IPython.display import IFrame, clear_output, display
-from openbabel import pybel
+
+
+# check if openbabel is installed
+try:
+    from openbabel import pybel
+except ImportError:
+    print("OpenBabel is not installed. Please install it otherwise some functions will not work.")
+    command="conda install conda-forge::openbabel"
+    print(f"Run this command to install openbabel: {command}")
+
+    # raise ImportError("OpenBabel is not installed. Please install it first.")
+
 from rich import print
 from rich.console import Console
 from rich.style import Style
