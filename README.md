@@ -2,7 +2,7 @@
 ![licence](https://badgen.net/badge/license/MIT/blue)
 ![latest release](https://badgen.net/github/release/RahulScipts/RahulScipts)
 ![latest stable release](https://badgen.net/github/release/RahulScipts/RahulScipts/stable)
-![Test Status](https://badgen.net/github/status/micromatch/micromatch/4.0.1)
+
 
 
 
